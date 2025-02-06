@@ -1,0 +1,53 @@
+RNG_SEED: 54
+
+OUTPUT_DIR: './log_MMR_AeBAD_S'
+SAVE_DIR: './checkpoints'  # Add this line for saving models
+
+
+
+DATASET:
+  name: 'aebad_S'
+  resize: 256
+  imagesize: 224
+  subdatasets: ["AeBAD_S"]
+  domain_shift_category: "same"
+
+TRAIN:
+  enable: True
+  save_model: True
+  method: 'MMR'
+  dataset_path: '/Users/prashantronad/Documents/College/5thsemEL/AeBAD'
+  backbone: 'wideresnet50'
+
+  MMR:
+    DA_low_limit: 0.7
+    DA_up_limit: 1.
+    layers_to_extract_from : ["layer1", "layer2", "layer3"]
+    feature_compression : False
+    scale_factors : (4.0, 2.0, 1.0)
+    FPN_output_dim : (256, 512, 1024)
+    load_pretrain_model : True
+    model_chkpt : "/Users/prashantronad/Documents/College/5thsemEL/mae_visualize_vit_base.pth"
+    finetune_mask_ratio : 0.4
+    test_mask_ratio : 0.
+
+
+TRAIN_SETUPS:
+  batch_size: 16
+  num_workers: 8
+  learning_rate: 0.001
+  epochs: 200
+  weight_decay: 0.05
+  warmup_epochs: 50
+
+TEST:
+  enable: True
+  save_segmentation_images: True
+  method: 'MMR'
+  dataset_path: '/Users/prashantronad/Documents/College/5thsemEL/AeBAD'
+
+  VISUALIZE:
+    Random_sample: True
+
+TEST_SETUPS:
+  batch_size: 32

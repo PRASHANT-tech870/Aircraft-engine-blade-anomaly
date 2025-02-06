@@ -1,0 +1,121 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIRCRAFT ENGINE HEALTH MONITORING</title>
+    <link rel="stylesheet" href="{{ url_for('static', path='/styles.css') }}">
+    <!-- Add Roboto Mono for that technical feel -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <!-- Add Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <header class="main-header">
+            <div class="header-content">
+                <div class="logo-section">
+                    <i class="fas fa-jet-fighter"></i>
+                    <h1> AIRCRAFT ENGINE BLADE ANOMALY DETECTION AND HEALTH MONITOR</h1>
+                </div>
+               <!-- In index.html, modify the system-status div -->
+        <!-- In index.html, modify the system-status div -->
+<div class="system-status">
+    <span class="status-indicator active">
+        <i class="fas fa-circle"></i> System Active
+    </span>
+    <a href="/training-results" class="btn primary view-results-btn">
+        <i class="fas fa-chart-line"></i> Training Results
+    </a>
+</div>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <div class="dashboard-grid">
+                <section class="upload-section">
+                    <div class="card">
+                        <h2><i class="fas fa-upload"></i> Image Analysis</h2>
+                        <div class="upload-zone" id="dropZone">
+                            <input type="file" id="imageInput" accept="image/*" hidden>
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <p>Drag & drop engine blade image or</p>
+                            <button id="uploadBtn" class="btn primary">Select File</button>
+                            <p id="fileName" class="file-name"></p>
+                        </div>
+                        <button id="analyzeBtn" class="btn secondary" disabled>
+                            <i class="fas fa-microscope"></i> Analyze Image
+                        </button>
+                    </div>
+                </section>
+
+                <section class="results-section" id="resultsSection">
+                    <div class="card">
+                        <h2><i class="fas fa-chart-line"></i> Analysis Results</h2>
+                        <div class="results-grid">
+                            <div class="result-card">
+                                <h3>Original Image</h3>
+                                <div class="image-container">
+                                    <img id="originalImage" alt="Original image">
+                                </div>
+                            </div>
+                            <div class="result-card">
+                                <h3>Anomaly Detection</h3>
+                                <div class="image-container">
+                                    <img id="anomalyMap" alt="Anomaly map">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="metrics-panel">
+                            <div class="metric">
+                                <h4>Anomaly Score</h4>
+                                <span id="anomalyScore" class="metric-value">-</span>
+                            </div>
+                            <div class="metric">
+                                <h4>Classification</h4>
+                                <span id="classification" class="metric-value">-</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Add this after the results-section in index.html -->
+            <section class="sensor-data-section" id="sensorDataSection">
+                <div class="card">
+                    <h2><i class="fas fa-microchip"></i> Engine Sensor Data</h2>
+                    <button id="fetchSensorBtn" class="btn primary">
+                        <i class="fas fa-sync"></i> Fetch Sensor Data
+                    </button>
+                    <div class="sensor-data-grid" id="sensorDataGrid">
+                        <!-- Data will be populated here -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Add this after the sensor-data-section in index.html -->
+<section class="report-section" id="reportSection">
+    <div class="card">
+        <h2><i class="fas fa-file-medical-alt"></i> Engine Health Report</h2>
+        <button id="generateReportBtn" class="btn primary">
+            <i class="fas fa-file-medical"></i> Generate Report
+        </button>
+        <div id="reportStatus" class="report-status"></div>
+    </div>
+</section>
+            </div>
+        </main>
+
+        <div id="loadingSpinner" class="loading-overlay">
+            <div class="loading-content">
+                <div class="spinner">
+                    <i class="fas fa-cog fa-spin"></i>
+                </div>
+                <p>Analyzing Engine Blade...</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', path='/script.js') }}"></script>
+</body>
+</html>

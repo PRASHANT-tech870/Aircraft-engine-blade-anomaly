@@ -1,0 +1,179 @@
+<!-- templates/results.html -->
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Model Training Results - Engine Health Monitoring</title>
+    <link rel="stylesheet" href="{{ url_for('static', path='/styles.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <header class="main-header">
+            <div class="header-content">
+                <div class="logo-section">
+                    <i class="fas fa-jet-fighter"></i>
+                    <h1>Model Training Results</h1>
+                </div>
+                <div class="system-status">
+                    <a href="/" class="btn primary view-results-btn">
+                        <i class="fas fa-home"></i> Back to Dashboard
+                    </a>
+                </div>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <div class="dashboard-grid">
+                <!-- MMR Model Section -->
+                <section class="model-section">
+                    <div class="card">
+                        <h2><i class="fas fa-microscope"></i> MMR Model Results (AeBAD_S Dataset)</h2>
+                        <div class="model-description">
+                            <p>The MMR (Masked Multi-scale Reconstruction) model is designed to detect anomalies in engine blade images. Here's what each metric means:</p>
+                        </div>
+                        <div class="metrics-explanation">
+                            <div class="metric-group">
+                                <h3>Primary Metrics</h3>
+                                <div class="metrics-panel">
+                                    <div class="metric highlighted">
+                                        <h4>Image Level AUROC <i class="fas fa-info-circle" title="Measures how well the model can distinguish between normal and anomalous images"></i></h4>
+                                        <span class="metric-value highlight">80.30%</span>
+                                        <p class="metric-description">Indicates the model's ability to correctly classify entire images as normal or anomalous</p>
+                                    </div>
+                                    <div class="metric highlighted">
+                                        <h4>Full Pixel Level AUROC <i class="fas fa-info-circle" title="Measures accuracy of pixel-level anomaly detection"></i></h4>
+                                        <span class="metric-value highlight">88.83%</span>
+                                        <p class="metric-description">Shows how accurately the model identifies the exact location of anomalies in images</p>
+                                    </div>
+                                    <div class="metric highlighted">
+                                        <h4>Per-region-overlap (PRO) <i class="fas fa-info-circle" title="Measures how well predicted anomalous regions match actual defects"></i></h4>
+                                        <span class="metric-value highlight">86.40%</span>
+                                        <p class="metric-description">Evaluates how well the detected anomaly regions align with actual defective areas</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="metric-group">
+                                <h3>Average Performance</h3>
+                                <div class="metrics-panel">
+                                    <div class="metric">
+                                        <h4>Mean AUROC</h4>
+                                        <span class="metric-value">84.68%</span>
+                                        <p class="metric-description">Average of image-level detection performance</p>
+                                    </div>
+                                    <div class="metric">
+                                        <h4>Mean Pixel-AUROC</h4>
+                                        <span class="metric-value">90.44%</span>
+                                        <p class="metric-description">Average accuracy of pixel-level anomaly detection</p>
+                                    </div>
+                                    <div class="metric">
+                                        <h4>Mean PRO</h4>
+                                        <span class="metric-value">89.05%</span>
+                                        <p class="metric-description">Average accuracy of anomaly region detection</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- VGG16 Classification Model Section -->
+                <section class="model-section">
+                    <div class="card">
+                        <h2><i class="fas fa-list"></i> VGG16 Classification Results</h2>
+                        <div class="model-info highlighted">
+                            <p><strong>Overall Accuracy: <span class="highlight">81.5%</span></strong></p>
+                            <p>Total Images: 1,639 | Correct Predictions: 1,336 | Incorrect Predictions: 303</p>
+                            <p class="model-description">This model classifies engine blade defects into five categories: Ablation, Breakdown, Fracture, Good, and Groove</p>
+                        </div>
+                        
+                        <div class="table-container">
+                            <h3>Performance by Class</h3>
+                            <table class="performance-table">
+                                <thead>
+                                    <tr>
+                                        <th>Class</th>
+                                        <th>Precision</th>
+                                        <th>Recall</th>
+                                        <th>F1-score</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Ablation</td>
+                                        <td>0.78</td>
+                                        <td>0.82</td>
+                                        <td>0.80</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Breakdown</td>
+                                        <td>0.83</td>
+                                        <td>0.81</td>
+                                        <td>0.82</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Fracture</td>
+                                        <td>0.86</td>
+                                        <td>0.82</td>
+                                        <td>0.84</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Good</td>
+                                        <td>0.84</td>
+                                        <td>0.86</td>
+                                        <td>0.85</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Groove</td>
+                                        <td>0.74</td>
+                                        <td>0.76</td>
+                                        <td>0.75</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Engine Health Classification Section -->
+                <section class="model-section">
+                    <div class="card">
+                        <h2><i class="fas fa-heartbeat"></i> Engine Health Classification (Random Forest)</h2>
+                        <div class="model-description">
+                            <p>This model classifies overall engine health into three categories: Good (0), Moderate (1), and Very Bad (2)</p>
+                        </div>
+                        <div class="metrics-panel highlighted">
+                            <div class="metric">
+                                <h4>Accuracy</h4>
+                                <span class="metric-value highlight">89.05%</span>
+                            </div>
+                            <div class="metric">
+                                <h4>Precision</h4>
+                                <span class="metric-value highlight">89.08%</span>
+                            </div>
+                            <div class="metric">
+                                <h4>Recall</h4>
+                                <span class="metric-value">89.05%</span>
+                            </div>
+                            <div class="metric">
+                                <h4>F1 Score</h4>
+                                <span class="metric-value">89.06%</span>
+                            </div>
+                        </div>
+                        
+                        <div class="confusion-matrix">
+                            <h3>Confusion Matrix</h3>
+                            <img src="{{ url_for('static', path='/images/confusion_matrix.png') }}" alt="Confusion Matrix">
+                            <div class="matrix-legend">
+                                <p>Class Labels: 0 - Good, 1 - Moderate, 2 - Very Bad</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+</body>
+</html>
