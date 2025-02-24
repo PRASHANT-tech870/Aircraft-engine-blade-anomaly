@@ -1,6 +1,15 @@
-# Aircraft Engine health Monitoring System
+# Turbine Monitoring System
 
 A comprehensive system for monitoring and analyzing turbine performance using AI-powered image analysis and sensor data processing.
+
+## Demo
+
+Watch our system demonstration:
+
+![image](https://github.com/user-attachments/assets/700881f6-d5a6-486f-8274-ced90e595f8c)
+
+
+[View Demo Video](https://youtu.be/W5WtakFsWJs?si=ZkGBsYCKsYv3RWAg)
 
 ## Setup
 
